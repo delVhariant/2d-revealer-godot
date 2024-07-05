@@ -1,0 +1,6 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://d0obvwmfu8o36"]
+
+[ext_resource type="Shader" path="res://addons/revealer/shaders/blur_postprocess.gdshader" id="1_511m2"]
+
+[resource]
+shader = ExtResource("1_511m2")
