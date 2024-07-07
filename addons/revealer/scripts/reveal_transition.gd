@@ -1,12 +1,14 @@
 class_name RevealTransition extends Node2D
 
 @export var from: RevealableGroup
-@export var to:  RevealableGroup
+@export var to: RevealableGroup
 @export var current: RevealableGroup
+
 
 func _process(delta: float) -> void:
 	if current.reveal_state != RevealableUtils.RevealStates.WAITING:
 		current.process_reveal(delta)
+
 
 func do_reveal() -> void:
 	if from == current:
