@@ -1,0 +1,142 @@
+[gd_scene load_steps=9 format=3 uid="uid://dks31saefdo1u"]
+
+[ext_resource type="Script" path="res://addons/revealer/scripts/revealable_group.gd" id="1_sueny"]
+[ext_resource type="Texture2D" uid="uid://bnhkooov26ty5" path="res://examples/assets/props/InteriorAssets.png" id="2_h0woh"]
+[ext_resource type="Texture2D" uid="uid://b0q68ardxfsx6" path="res://examples/assets/depth/Hut_cropped.png" id="3_0vi18"]
+[ext_resource type="Script" path="res://examples/scripts/reveal_button.gd" id="4_d0ucy"]
+[ext_resource type="Script" path="res://addons/revealer/scripts/reveal_transition.gd" id="5_djx3o"]
+[ext_resource type="Texture2D" uid="uid://d33rbekla7wb2" path="res://examples/assets/depth/Garden.png" id="6_goxbj"]
+[ext_resource type="Texture2D" uid="uid://ccd3bfa84wtf1" path="res://examples/assets/depth/Interior.png" id="7_8hbub"]
+[ext_resource type="Texture2D" uid="uid://cnsjj555g5fsq" path="res://examples/assets/depth/Foreground.png" id="8_e6eq1"]
+
+[node name="Castle" type="Node2D"]
+
+[node name="ExteriorRevealableGroup" type="Node2D" parent="." node_paths=PackedStringArray("revealable_parent", "group_mask")]
+script = ExtResource("1_sueny")
+revealable_parent = NodePath("../Exterior")
+group_mask = NodePath("../Interior")
+
+[node name="InteriorRevealableGroup" type="Node2D" parent="." node_paths=PackedStringArray("revealable_parent", "revealable_targets", "group_mask")]
+script = ExtResource("1_sueny")
+revealable_parent = NodePath("../Interior")
+revealable_targets = [NodePath("../Interior/Sprite2D2"), NodePath("../Interior/Sprite2D3")]
+group_mask = NodePath("../Garden")
+
+[node name="GardenRevealableGroup" type="Node2D" parent="." node_paths=PackedStringArray("revealable_parent", "revealable_targets", "group_mask")]
+script = ExtResource("1_sueny")
+revealable_parent = NodePath("../Garden")
+revealable_targets = [NodePath("../Sprite2D")]
+group_mask = NodePath("../Hut")
+reveal_group_depth = 2
+
+[node name="HutRevealableGroup" type="Node2D" parent="." node_paths=PackedStringArray("revealable_parent", "group_mask")]
+script = ExtResource("1_sueny")
+revealable_parent = NodePath("../Hut")
+group_mask = NodePath("../Exterior")
+reveal_group_depth = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(945, 962)
+texture = ExtResource("2_h0woh")
+region_enabled = true
+region_rect = Rect2(431, 176, 80, 80)
+
+[node name="Hut" type="Sprite2D" parent="."]
+process_mode = 4
+position = Vector2(800, 928)
+texture = ExtResource("3_0vi18")
+
+[node name="HutButton" type="Button" parent="Hut" node_paths=PackedStringArray("reveal_transition")]
+offset_left = 10.0
+offset_top = 24.0
+offset_right = 60.0
+offset_bottom = 55.0
+text = "Enter"
+script = ExtResource("4_d0ucy")
+reveal_transition = NodePath("../RevealTransition4")
+
+[node name="RevealTransition4" type="Node2D" parent="Hut" node_paths=PackedStringArray("from", "to", "current")]
+position = Vector2(124, 484)
+script = ExtResource("5_djx3o")
+from = NodePath("../../HutRevealableGroup")
+to = NodePath("../../ExteriorRevealableGroup")
+current = NodePath("../../HutRevealableGroup")
+
+[node name="Garden" type="Sprite2D" parent="."]
+process_mode = 4
+position = Vector2(710, 508)
+texture = ExtResource("6_goxbj")
+
+[node name="GardenButton" type="Button" parent="Garden" node_paths=PackedStringArray("reveal_transition")]
+offset_left = 12.0
+offset_top = 444.0
+offset_right = 62.0
+offset_bottom = 475.0
+text = "Enter"
+script = ExtResource("4_d0ucy")
+reveal_transition = NodePath("../RevealTransition3")
+
+[node name="RevealTransition3" type="Node2D" parent="Garden" node_paths=PackedStringArray("from", "to", "current")]
+position = Vector2(36, 460)
+script = ExtResource("5_djx3o")
+from = NodePath("../../GardenRevealableGroup")
+to = NodePath("../../HutRevealableGroup")
+current = NodePath("../../GardenRevealableGroup")
+
+[node name="Interior" type="Sprite2D" parent="."]
+process_mode = 4
+position = Vector2(596, 508)
+texture = ExtResource("7_8hbub")
+
+[node name="InteriorButton" type="Button" parent="Interior" node_paths=PackedStringArray("reveal_transition")]
+offset_left = -316.0
+offset_top = 428.0
+offset_right = -266.0
+offset_bottom = 459.0
+text = "Enter"
+script = ExtResource("4_d0ucy")
+reveal_transition = NodePath("../RevealTransition2")
+
+[node name="RevealTransition2" type="Node2D" parent="Interior" node_paths=PackedStringArray("from", "to", "current")]
+position = Vector2(-292, 436)
+script = ExtResource("5_djx3o")
+from = NodePath("../../InteriorRevealableGroup")
+to = NodePath("../../GardenRevealableGroup")
+current = NodePath("../../InteriorRevealableGroup")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Interior"]
+position = Vector2(427, 442)
+texture = ExtResource("2_h0woh")
+region_enabled = true
+region_rect = Rect2(248, 432, 67, 48)
+
+[node name="Sprite2D3" type="Sprite2D" parent="Interior"]
+position = Vector2(426, 479)
+texture = ExtResource("2_h0woh")
+region_enabled = true
+region_rect = Rect2(29, 453, 118, 27)
+
+[node name="Exterior" type="Sprite2D" parent="."]
+position = Vector2(596, 508)
+texture = ExtResource("8_e6eq1")
+
+[node name="ExteriorButton" type="Button" parent="Exterior" node_paths=PackedStringArray("reveal_transition")]
+offset_left = 116.0
+offset_top = 436.0
+offset_right = 166.0
+offset_bottom = 467.0
+text = "Enter"
+script = ExtResource("4_d0ucy")
+reveal_transition = NodePath("../RevealTransition")
+
+[node name="RevealTransition" type="Node2D" parent="Exterior" node_paths=PackedStringArray("from", "to", "current")]
+position = Vector2(140, 444)
+script = ExtResource("5_djx3o")
+from = NodePath("../../ExteriorRevealableGroup")
+to = NodePath("../../InteriorRevealableGroup")
+current = NodePath("../../ExteriorRevealableGroup")
+
+[connection signal="pressed" from="Hut/HutButton" to="Hut/HutButton" method="_clicked"]
+[connection signal="pressed" from="Garden/GardenButton" to="Garden/GardenButton" method="_clicked"]
+[connection signal="pressed" from="Interior/InteriorButton" to="Interior/InteriorButton" method="_clicked"]
+[connection signal="pressed" from="Exterior/ExteriorButton" to="Exterior/ExteriorButton" method="_clicked"]
