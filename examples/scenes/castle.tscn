@@ -11,28 +11,24 @@
 
 [node name="Castle" type="Node2D"]
 
-[node name="ExteriorRevealableGroup" type="Node2D" parent="." node_paths=PackedStringArray("revealable_parent", "group_mask")]
+[node name="ExteriorRevealableGroup" type="Node2D" parent="." node_paths=PackedStringArray("revealable_parent")]
 script = ExtResource("1_sueny")
 revealable_parent = NodePath("../Exterior")
-group_mask = NodePath("../Interior")
 
-[node name="InteriorRevealableGroup" type="Node2D" parent="." node_paths=PackedStringArray("revealable_parent", "revealable_targets", "group_mask")]
+[node name="InteriorRevealableGroup" type="Node2D" parent="." node_paths=PackedStringArray("revealable_parent", "revealable_targets")]
 script = ExtResource("1_sueny")
 revealable_parent = NodePath("../Interior")
 revealable_targets = [NodePath("../Interior/Sprite2D2"), NodePath("../Interior/Sprite2D3")]
-group_mask = NodePath("../Garden")
 
-[node name="GardenRevealableGroup" type="Node2D" parent="." node_paths=PackedStringArray("revealable_parent", "revealable_targets", "group_mask")]
+[node name="GardenRevealableGroup" type="Node2D" parent="." node_paths=PackedStringArray("revealable_parent", "revealable_targets")]
 script = ExtResource("1_sueny")
 revealable_parent = NodePath("../Garden")
 revealable_targets = [NodePath("../Sprite2D")]
-group_mask = NodePath("../Hut")
 reveal_group_depth = 2
 
-[node name="HutRevealableGroup" type="Node2D" parent="." node_paths=PackedStringArray("revealable_parent", "group_mask")]
+[node name="HutRevealableGroup" type="Node2D" parent="." node_paths=PackedStringArray("revealable_parent")]
 script = ExtResource("1_sueny")
 revealable_parent = NodePath("../Hut")
-group_mask = NodePath("../Exterior")
 reveal_group_depth = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

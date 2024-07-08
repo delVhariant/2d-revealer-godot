@@ -24,10 +24,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	if active and event.is_action_released("interact"):
 		do_reveal()
 
-func _process(delta: float) -> void:
-	if current && current.reveal_state != RevealableUtils.RevealStates.WAITING:
-		current.process_reveal(delta)
-
 func do_reveal() -> void:
 	if from == current:
 		from.begin_reveal(self.global_position)
