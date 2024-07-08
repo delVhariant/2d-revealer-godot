@@ -16,4 +16,6 @@ data_*/
 
 # Custom tools
 tools/
->>>>>>> main
+
+# vscode
+*.code-workspace
