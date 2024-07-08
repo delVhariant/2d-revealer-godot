@@ -7,7 +7,8 @@ signal set_z_index(value)
 
 @export var revealable_parent: Sprite2D
 @export var revealable_targets: Array[Sprite2D]
-@export var group_mask: Sprite2D
+@export var modulate_targets: Array[Node2D]
+@export var revealable_mask: Sprite2D
 @export var default_z_index := RevealableUtils.RevealableZIndexes.BEHIND
 @export var revealed_z_index := RevealableUtils.RevealableZIndexes.IN_FRONT
 @export var reveal_state := RevealableUtils.RevealStates.WAITING
@@ -18,7 +19,8 @@ signal set_z_index(value)
 var revealables: Array[Revealable]
 var mask_rect: Rect2
 var mask_size: Vector2
-var reveal_material = preload("res://addons/revealer/materials/revealable.tres")
+var reveal_material_resource = preload("res://addons/revealer/materials/revealable.tres")
+var reveal_material: ShaderMaterial
 
 
 func _ready() -> void:
@@ -26,15 +28,21 @@ func _ready() -> void:
 		printerr("No revealable_parent assigned to RevealableGroup {0}".format([self.name]))
 		process_mode = Node.PROCESS_MODE_DISABLED
 		return
-	if !group_mask:
-		printerr("No group_mask assigned to RevealableGroup {0}".format([self.name]))
+	if !revealable_mask:
+		printerr("No revealable_mask assigned to RevealableGroup {0}".format([self.name]))
 		process_mode = Node.PROCESS_MODE_DISABLED
 		return
-	populate_mask_details()
+	# Clone the material
+	setup_material()
+	setup_mask()
 	setup_parent()
-	#setup_group()
-	for r in revealable_targets:
-		r.use_parent_material = true
+	setup_group()
+
+
+func setup_material() -> void:
+	reveal_material = reveal_material_resource.duplicate()
+	reveal_material.set_shader_parameter("mask_sampler", revealable_mask.texture)
+	reveal_material.set_shader_parameter("reveal_depth", reveal_group_depth)
 
 
 func setup_parent() -> void:
@@ -47,11 +55,9 @@ func setup_group() -> void:
 
 
 func setup_revealer(r: Sprite2D):
-	var o = Revealable.new(r, reveal_material, reveal_group_depth, revealable_parent, group_mask)
+	var o = Revealable.new(r, reveal_material)
 	do_reveal.connect(o.reveal)
-	set_reveal_target.connect(o.set_reveal_target)
-	#set_revealer.connect(o.set_revealer_position)
-	#set_z_index.connect(o.target.set_z_index)
+	# set_reveal_target.connect(o.set_reveal_target)
 	revealables.append(o)
 
 
@@ -66,7 +72,9 @@ func _process(delta: float) -> void:
 	elif reveal_state == RevealableUtils.RevealStates.CONCEAL:
 		reveal_amount -= delta * (1 / reveal_time)
 
-	do_reveal.emit(reveal_amount)
+	# do_reveal.emit(reveal_amount)
+	reveal_material.set_shader_parameter("revealed_amount", reveal_amount)
+	do_modulate(1.0 - reveal_amount)
 	if reveal_amount > 1.0 or reveal_amount < 0.0:
 		reveal_amount = round(reveal_amount)
 		reveal_state = RevealableUtils.RevealStates.WAITING
@@ -82,32 +90,45 @@ func enable_processing(value: bool):
 func begin_reveal(_position: Vector2):
 	reveal_state = RevealableUtils.RevealStates.REVEAL
 	set_mask_screen_rect()
-	#set_revealer.emit(position)
-	set_reveal_target.emit(1.0)
-	#set_z_index.emit(default_z_index)
+	reveal_material.set_shader_parameter("revealed_amount_target", 1.0)
 
 
 func begin_conceal(_position: Vector2):
 	reveal_state = RevealableUtils.RevealStates.CONCEAL
-	#set_revealer.emit(position)
-	set_reveal_target.emit(0.0)
-	#set_z_index.emit(revealed_z_index)
+	reveal_material.set_shader_parameter("revealed_amount_target", 0.0)
 
 
-func populate_mask_details() -> void:
-	#mask_rect = group_mask.get_rect()
-	mask_size = group_mask.get_rect().size
-	mask_rect = Rect2(group_mask.global_position - (mask_size / 2), mask_size)
+func do_modulate(value: float):
+	for t in modulate_targets:
+		t.modulate.a = value
+
+
+func setup_mask() -> void:
+	mask_size = revealable_mask.get_rect().size
+
+
+func get_camera_zoom():
+	var vp := get_viewport()
+	if !vp:
+		return 1.0
+	var cam = get_viewport().get_camera_2d()
+	if !cam:
+		return 1.0
+	return cam.zoom
 
 
 func set_mask_screen_rect() -> void:
-	var zoom = get_viewport().get_camera_2d().zoom
-	var offset = (mask_size / 2) * group_mask.scale * zoom
-	#var rect_min = group_mask.get_global_transform_with_canvas().origin - offset
-	#var rect_max = group_mask.get_global_transform_with_canvas().origin + offset
+	var offset = (mask_size / 2) * revealable_mask.scale * get_camera_zoom()
+	#var rect_min = revealable_mask.get_global_transform_with_canvas().origin - offset
+	#var rect_max = revealable_mask.get_global_transform_with_canvas().origin + offset
 
-	var rect_min = group_mask.get_screen_transform().origin - offset
-	var rect_max = group_mask.get_screen_transform().origin + offset
+	var rect_min = revealable_mask.get_screen_transform().origin
+	var rect_max = revealable_mask.get_screen_transform().origin
+	if revealable_mask.centered:
+		rect_min -= offset
+		rect_max += offset
+	else:
+		rect_max += (offset * 2)
 	RevealableUtils.set_bounds(
 		reveal_group_depth, Vector4(rect_min.x, rect_min.y, rect_max.x, rect_max.y)
 	)

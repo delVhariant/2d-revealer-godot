@@ -11,14 +11,6 @@ enum RevealableZIndexes {
 static var bounds: Array[Vector4] = [Vector4(), Vector4(), Vector4(), Vector4()]
 
 
-static func set_primary_bounds(value: Vector4):
-	RenderingServer.global_shader_parameter_set("primary_mask_bounds", value)
-
-
-static func set_secondary_bounds(value: Vector4):
-	RenderingServer.global_shader_parameter_set("secondary_mask_bounds", value)
-
-
 static func set_bounds(depth: int, value: Vector4):
 	bounds[depth] = value
 	RenderingServer.global_shader_parameter_set(
