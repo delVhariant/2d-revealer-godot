@@ -19,6 +19,14 @@ config/icon="res://icon.svg"
 
 enabled=PackedStringArray("res://addons/revealer/plugin.cfg", "res://addons/gdUnit4/plugin.cfg")
 
+[filesystem]
+
+import/blender/enabled=false
+
+[gdunit4]
+
+settings/test/test_discovery=true
+
 [input]
 
 move_left={
@@ -39,11 +47,6 @@ interact={
 ]
 }
 
-[rendering]
-
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
-
 [shader_globals]
 
 mask_bounds={
@@ -53,4 +56,8 @@ mask_bounds={
 primary_mask_bounds={
 "type": "vec4",
 "value": Vector4(0, 0, 0, 0)
+}
+mask_samplers={
+"type": "sampler2DArray",
+"value": ""
 }
