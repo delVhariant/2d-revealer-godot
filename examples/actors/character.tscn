@@ -4,18 +4,21 @@
 [ext_resource type="SpriteFrames" uid="uid://b075r73w163ij" path="res://examples/assets/character/character.tres" id="2_vg0gg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gxf2b"]
-size = Vector2(6, 9)
+size = Vector2(3, 4)
 
 [node name="Character" type="CharacterBody2D"]
 script = ExtResource("1_hlryr")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
+scale = Vector2(0.5, 0.5)
 sprite_frames = ExtResource("2_vg0gg")
 animation = &"walk"
 
 [node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(0, -10)
+zoom = Vector2(15, 15)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 3.5)
+position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_gxf2b")
