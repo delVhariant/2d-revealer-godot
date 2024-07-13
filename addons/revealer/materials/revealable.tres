@@ -1,14 +1,14 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://c2lgyq8d5mpjn"]
 
 [ext_resource type="Shader" path="res://addons/revealer/shaders/revealable.gdshader" id="1_6hl3y"]
-[ext_resource type="Texture2D" uid="uid://ci5pmuk4impnf" path="res://examples/assets/depth/Hut.png" id="2_jm5nj"]
+[ext_resource type="Texture2D" uid="uid://cqjlyr1x6wd4k" path="res://examples/assets/Outside.png" id="2_vtqe5"]
 
 [resource]
 shader = ExtResource("1_6hl3y")
-shader_parameter/revealed_amount = 0.0
-shader_parameter/revealed_amount_target = 0.0
-shader_parameter/feather = 0.05
-shader_parameter/points = 5.0
-shader_parameter/start_position = Vector2(0, 0)
+shader_parameter/revealed_amount = 0.259
+shader_parameter/start_position = Vector2(450, 450)
 shader_parameter/reveal_depth = 0
-shader_parameter/mask_sampler = ExtResource("2_jm5nj")
+shader_parameter/mask_vignette = Vector4(10, 10, 10, 0)
+shader_parameter/mask_vignette_color = Color(0.737001, 0.377725, 0.126103, 1)
+shader_parameter/circular_reveal = true
+shader_parameter/mask_sampler = ExtResource("2_vtqe5")
