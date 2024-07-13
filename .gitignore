@@ -17,5 +17,9 @@ data_*/
 # Custom tools
 tools/
 
-# vscode
+# editors
 *.code-workspace
+.zed/
+
+addons/gdUnit4
+addons/godot-git-plugin
