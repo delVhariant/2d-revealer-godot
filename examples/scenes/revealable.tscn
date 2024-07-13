@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dwqq7amnhb5ay"]
+[gd_scene load_steps=7 format=3 uid="uid://dwqq7amnhb5ay"]
 
 [ext_resource type="Script" path="res://addons/revealer/scripts/revealable_group.gd" id="1_5ereu"]
 [ext_resource type="Texture2D" uid="uid://cnjmqrcdubeuk" path="res://examples/assets/Inside.png" id="2_w6uxh"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://cqjlyr1x6wd4k" path="res://examples/assets/Outside.png" id="4_c3ukt"]
 [ext_resource type="Texture2D" uid="uid://bvvd0wwomwgfx" path="res://examples/assets/post.png" id="5_hj8i2"]
 [ext_resource type="Script" path="res://examples/scripts/reveal_tester.gd" id="6_rkpcm"]
-[ext_resource type="Texture2D" uid="uid://ci5pmuk4impnf" path="res://examples/assets/depth/Hut.png" id="7_80uxg"]
 
 [node name="Revealable" type="Node2D"]
 
@@ -20,8 +19,8 @@ reveal_time = 0.7
 
 [node name="Mask" type="Sprite2D" parent="RevealableGroup"]
 self_modulate = Color(1, 1, 1, 0.666667)
-position = Vector2(120, 56)
-texture = ExtResource("7_80uxg")
+position = Vector2(536, -160)
+texture = ExtResource("4_c3ukt")
 centered = false
 
 [node name="Inside" type="Sprite2D" parent="."]
