@@ -1,8 +1,12 @@
 class_name RevealableUtils extends Node2D
 
+# TODO this should be a manager class that tracks all revealables / materials
+# that way each revealable can more easily track multiple layers/masks
+# without the groups needing to be aware of each other
+
 enum RevealStates { REVEAL, CONCEAL, WAITING }
 
-enum RevealableZIndexes {
+enum LayerIndexes {
 	BEHIND = 0,
 	PLAYER = 1,
 	IN_FRONT = 2,
