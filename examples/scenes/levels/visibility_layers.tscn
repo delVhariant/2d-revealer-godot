@@ -1,0 +1,198 @@
+[gd_scene load_steps=15 format=3 uid="uid://d0f1bcevalf33"]
+
+[ext_resource type="Texture2D" uid="uid://d0pwhiyb4vby1" path="res://examples/assets/visibility_layers/Layout.png" id="1_cqksx"]
+[ext_resource type="Texture2D" uid="uid://muumhlh87rk2" path="res://examples/assets/visibility_layers/Ground.png" id="2_7rcj6"]
+[ext_resource type="Script" path="res://addons/revealer/scripts/reveal_layer.gd" id="3_6b0ew"]
+[ext_resource type="Texture2D" uid="uid://c2k807c86es1x" path="res://examples/assets/visibility_layers/InsideMain.png" id="4_jrm0r"]
+[ext_resource type="Texture2D" uid="uid://d18jd32dywgd3" path="res://examples/assets/visibility_layers/DoorInner.png" id="5_a3gqu"]
+[ext_resource type="Texture2D" uid="uid://bnfkbch3pio4i" path="res://examples/assets/visibility_layers/DoorOuter.png" id="6_tkr4g"]
+[ext_resource type="PackedScene" uid="uid://dbmrws1dbm6eo" path="res://examples/scenes/actors/reveal_transition.tscn" id="7_dly1m"]
+[ext_resource type="Texture2D" uid="uid://b16k6c5etqffs" path="res://examples/assets/visibility_layers/FrontLeft.png" id="8_myh1n"]
+[ext_resource type="Texture2D" uid="uid://cqveii7ud31s1" path="res://examples/assets/visibility_layers/FrontRight.png" id="9_xvsrb"]
+[ext_resource type="Texture2D" uid="uid://bdjnqqur6qqia" path="res://examples/assets/visibility_layers/FrontHallway.png" id="10_g6g0t"]
+[ext_resource type="Texture2D" uid="uid://c7ascs0jd80v2" path="res://examples/assets/visibility_layers/BackHallway.png" id="11_4ymil"]
+[ext_resource type="Texture2D" uid="uid://dq3bu4u0f6vk6" path="res://examples/assets/visibility_layers/Outside.png" id="12_43ic4"]
+[ext_resource type="PackedScene" uid="uid://ca126qkj8yrw7" path="res://examples/actors/character.tscn" id="13_2scjh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fp6o1"]
+size = Vector2(128, 2)
+
+[node name="VisibilityLayers" type="Node2D"]
+texture_filter = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+follow_viewport_enabled = true
+
+[node name="Layout" type="Sprite2D" parent="CanvasLayer"]
+texture_filter = 1
+position = Vector2(63.5, -5)
+texture = ExtResource("1_cqksx")
+
+[node name="Ground" type="Sprite2D" parent="."]
+position = Vector2(76, 29.5)
+texture = ExtResource("2_7rcj6")
+metadata/_edit_group_ = true
+
+[node name="GroundCollider" type="StaticBody2D" parent="Ground"]
+position = Vector2(0, 0.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground/GroundCollider"]
+shape = SubResource("RectangleShape2D_fp6o1")
+
+[node name="EntranceInteriorLayer" type="Node2D" parent="." node_paths=PackedStringArray("targets", "mask_sprite")]
+script = ExtResource("3_6b0ew")
+targets = [NodePath("InsideMain")]
+alpha = 0.0
+mask_sprite = NodePath("InsideMain")
+
+[node name="InsideMain" type="Sprite2D" parent="EntranceInteriorLayer"]
+self_modulate = Color(0, 1, 1, 1)
+position = Vector2(55, 22.5)
+texture = ExtResource("4_jrm0r")
+
+[node name="DoorInner" type="Sprite2D" parent="EntranceInteriorLayer/InsideMain"]
+z_index = 10
+position = Vector2(-7, 4.5)
+texture = ExtResource("5_a3gqu")
+
+[node name="DoorOuter" type="Sprite2D" parent="EntranceInteriorLayer/InsideMain"]
+position = Vector2(11, 4.5)
+texture = ExtResource("6_tkr4g")
+
+[node name="Front_to_Hallway" parent="EntranceInteriorLayer/InsideMain/DoorOuter" node_paths=PackedStringArray("reveal", "conceal", "linked") instance=ExtResource("7_dly1m")]
+reveal = [NodePath("../../../../FrontHallwaylLayer")]
+conceal = [NodePath("../../..")]
+type = 1
+linked = NodePath("../../../../FrontHallwaylLayer/FrontHallway/DoorInner/Hallway_to_Front")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="EntranceInteriorLayer/InsideMain"]
+position = Vector2(-7, 4.5)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="EntranceInteriorLayer/InsideMain/StaticBody2D"]
+polygon = PackedVector2Array(-8, 2, -8, 2, -8, -11, 22, -11, 22, 2, 23, 2, 23, -12, -9, -12, -9, 2)
+
+[node name="LeftRoomLayer" type="Node2D" parent="." node_paths=PackedStringArray("targets")]
+script = ExtResource("3_6b0ew")
+targets = [NodePath("FrontLeft")]
+
+[node name="FrontLeft" type="Sprite2D" parent="LeftRoomLayer"]
+position = Vector2(31.5, 20.5)
+texture = ExtResource("8_myh1n")
+
+[node name="RightRoomLayer" type="Node2D" parent="." node_paths=PackedStringArray("targets", "mask_sprite")]
+script = ExtResource("3_6b0ew")
+targets = [NodePath("FrontRight")]
+alpha = 0.0
+mask_sprite = NodePath("FrontRight")
+
+[node name="FrontRight" type="Sprite2D" parent="RightRoomLayer"]
+modulate = Color(1, 1, 0, 1)
+position = Vector2(87, 23.5)
+texture = ExtResource("9_xvsrb")
+
+[node name="DoorOuter" type="Sprite2D" parent="RightRoomLayer/FrontRight"]
+position = Vector2(12, 3.5)
+texture = ExtResource("6_tkr4g")
+
+[node name="Right_to_Hallway" parent="RightRoomLayer/FrontRight/DoorOuter" node_paths=PackedStringArray("reveal", "conceal", "linked") instance=ExtResource("7_dly1m")]
+reveal = [NodePath("../../../../FrontHallwaylLayer")]
+conceal = [NodePath("../../..")]
+revealed = true
+type = 1
+linked = NodePath("../../../../FrontHallwaylLayer/FrontHallway/DoorInner2/Hallway_to_Right")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="RightRoomLayer/FrontRight"]
+position = Vector2(-32, -1)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RightRoomLayer/FrontRight/StaticBody2D2"]
+polygon = PackedVector2Array(16, 6.5, 16, -4.5, 48, -4.5, 48, 6.5, 49, 6.5, 49, -5.5, 15, -5.5, 15, 6.5)
+
+[node name="FrontHallwaylLayer" type="Node2D" parent="." node_paths=PackedStringArray("targets", "mask_sprite")]
+script = ExtResource("3_6b0ew")
+targets = [NodePath("FrontHallway")]
+alpha = 0.0
+mask_level = 1
+mask_sprite = NodePath("FrontHallway")
+
+[node name="FrontHallway" type="Sprite2D" parent="FrontHallwaylLayer"]
+self_modulate = Color(1, 0, 1, 1)
+position = Vector2(79.5, 23.5)
+texture = ExtResource("10_g6g0t")
+
+[node name="DoorInner2" type="Sprite2D" parent="FrontHallwaylLayer/FrontHallway"]
+z_index = 10
+position = Vector2(19.5, 3.5)
+texture = ExtResource("5_a3gqu")
+
+[node name="Hallway_to_Right" parent="FrontHallwaylLayer/FrontHallway/DoorInner2" node_paths=PackedStringArray("reveal", "conceal", "linked") instance=ExtResource("7_dly1m")]
+reveal = [NodePath("../../../../RightRoomLayer")]
+conceal = [NodePath("../../..")]
+type = 0
+linked = NodePath("../../../../RightRoomLayer/FrontRight/DoorOuter/Right_to_Hallway")
+
+[node name="DoorInner" type="Sprite2D" parent="FrontHallwaylLayer/FrontHallway"]
+z_index = 10
+position = Vector2(-13.5, 3.5)
+texture = ExtResource("5_a3gqu")
+
+[node name="Hallway_to_Front" parent="FrontHallwaylLayer/FrontHallway/DoorInner" node_paths=PackedStringArray("reveal", "conceal", "linked") instance=ExtResource("7_dly1m")]
+reveal = [NodePath("../../../../EntranceInteriorLayer")]
+conceal = [NodePath("../../..")]
+type = 0
+linked = NodePath("../../../../EntranceInteriorLayer/InsideMain/DoorOuter/Front_to_Hallway")
+
+[node name="DoorOuter" type="Sprite2D" parent="FrontHallwaylLayer/FrontHallway"]
+position = Vector2(-3.5, 3.5)
+texture = ExtResource("6_tkr4g")
+
+[node name="Hallway_to_Back" parent="FrontHallwaylLayer/FrontHallway/DoorOuter" node_paths=PackedStringArray("reveal", "conceal", "linked") instance=ExtResource("7_dly1m")]
+reveal = [NodePath("../../../../BackHallwayLayer")]
+conceal = [NodePath("../../..")]
+type = 1
+linked = NodePath("../../../../BackHallwayLayer/BackHallway/DoorInner/Back_to_Hallway")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="FrontHallwaylLayer/FrontHallway"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="FrontHallwaylLayer/FrontHallway/StaticBody2D"]
+polygon = PackedVector2Array(-23.5, 5.5, -23.5, -5.5, 23.5, -5.5, 23.5, 5.5, 24.5, 5.5, 24.5, -6.5, -24.5, -6.5, -24.5, 5.5)
+
+[node name="BackHallwayLayer" type="Node2D" parent="." node_paths=PackedStringArray("targets")]
+script = ExtResource("3_6b0ew")
+targets = [NodePath("BackHallway")]
+alpha = 0.0
+
+[node name="BackHallway" type="Sprite2D" parent="BackHallwayLayer"]
+position = Vector2(51.5, 20.5)
+texture = ExtResource("11_4ymil")
+
+[node name="DoorInner" type="Sprite2D" parent="BackHallwayLayer/BackHallway"]
+z_index = 10
+position = Vector2(24.5, 6.5)
+texture = ExtResource("5_a3gqu")
+
+[node name="Back_to_Hallway" parent="BackHallwayLayer/BackHallway/DoorInner" node_paths=PackedStringArray("reveal", "conceal", "linked") instance=ExtResource("7_dly1m")]
+reveal = [NodePath("../../../../FrontHallwaylLayer")]
+conceal = [NodePath("../../..")]
+type = 0
+linked = NodePath("../../../../FrontHallwaylLayer/FrontHallway/DoorOuter/Hallway_to_Back")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="BackHallwayLayer/BackHallway"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BackHallwayLayer/BackHallway/StaticBody2D"]
+polygon = PackedVector2Array(-27.5, 8.5, -27.5, 8.5, -27.5, -8.5, 27.5, -8.5, 27.5, 8.5, 28.5, 8.5, 28.5, -9.5, -28.5, -9.5, -28.5, 8.5)
+
+[node name="Outside" type="Sprite2D" parent="."]
+position = Vector2(63.5, 20.5)
+texture = ExtResource("12_43ic4")
+
+[node name="DoorOuter" type="Sprite2D" parent="Outside"]
+position = Vector2(-15.5, 6.5)
+texture = ExtResource("6_tkr4g")
+
+[node name="Outside_to_Entrance" parent="Outside/DoorOuter" node_paths=PackedStringArray("reveal") instance=ExtResource("7_dly1m")]
+reveal = [NodePath("../../../EntranceInteriorLayer")]
+
+[node name="Character" parent="." instance=ExtResource("13_2scjh")]
+visibility_layer = 2
+position = Vector2(18, 25)

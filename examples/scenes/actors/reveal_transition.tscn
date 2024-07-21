@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbmrws1dbm6eo"]
+
+[ext_resource type="Script" path="res://addons/revealer/scripts/reveal_transition.gd" id="1_f1u1c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8b2l6"]
+size = Vector2(4, 5)
+
+[node name="RevealTransition" type="Area2D" node_paths=PackedStringArray("reveal")]
+script = ExtResource("1_f1u1c")
+reveal = [null]
+
+[node name="Label" type="Label" parent="."]
+visible = false
+visibility_layer = 2
+z_index = 100
+offset_left = -3.0
+offset_top = -5.0
+offset_right = 59.0
+offset_bottom = 18.0
+scale = Vector2(0.1, 0.1)
+text = "Enter (f)"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_8b2l6")

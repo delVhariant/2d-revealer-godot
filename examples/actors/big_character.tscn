@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://gvcjemimdkbg"]
+
+[ext_resource type="Script" path="res://examples/scripts/character_movement.gd" id="1_ryjth"]
+[ext_resource type="SpriteFrames" uid="uid://b075r73w163ij" path="res://examples/assets/character/character.tres" id="2_hf8ps"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gxf2b"]
+size = Vector2(151.5, 452)
+
+[node name="Character" type="CharacterBody2D"]
+z_index = 15
+script = ExtResource("1_ryjth")
+speed = 18.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(50, 50)
+sprite_frames = ExtResource("2_hf8ps")
+animation = &"walk"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(0, -10)
+zoom = Vector2(0.5, 0.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(74.25, 174)
+shape = SubResource("RectangleShape2D_gxf2b")

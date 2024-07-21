@@ -7,7 +7,9 @@
 size = Vector2(3, 4)
 
 [node name="Character" type="CharacterBody2D"]
+z_index = 15
 script = ExtResource("1_hlryr")
+speed = 18.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

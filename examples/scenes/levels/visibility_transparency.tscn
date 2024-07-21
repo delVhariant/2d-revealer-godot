@@ -1,0 +1,113 @@
+[gd_scene load_steps=10 format=3 uid="uid://b7ttrgle1nu1y"]
+
+[ext_resource type="Script" path="res://addons/revealer/scripts/reveal_layer.gd" id="1_hq0ew"]
+[ext_resource type="Texture2D" uid="uid://cnjmqrcdubeuk" path="res://examples/assets/visibility_transparency/Inside.png" id="2_n1fec"]
+[ext_resource type="Texture2D" uid="uid://bnhkooov26ty5" path="res://examples/assets/props/InteriorAssets.png" id="3_fwmru"]
+[ext_resource type="Texture2D" uid="uid://cqjlyr1x6wd4k" path="res://examples/assets/visibility_transparency/Outside.png" id="4_n8itw"]
+[ext_resource type="PackedScene" uid="uid://gvcjemimdkbg" path="res://examples/actors/big_character.tscn" id="5_d835l"]
+[ext_resource type="Texture2D" uid="uid://bvvd0wwomwgfx" path="res://examples/assets/visibility_transparency/post.png" id="5_jg77v"]
+[ext_resource type="Script" path="res://addons/revealer/scripts/reveal_transition.gd" id="7_f3mo1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ylp7s"]
+size = Vector2(1920, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mjh6h"]
+size = Vector2(344, 376)
+
+[node name="VisibilityTransparency" type="Node2D"]
+texture_filter = 1
+
+[node name="InnerLayer" type="Node2D" parent="."]
+script = ExtResource("1_hq0ew")
+
+[node name="Inside" type="Sprite2D" parent="InnerLayer"]
+texture = ExtResource("2_n1fec")
+
+[node name="InteriorAssets" type="Sprite2D" parent="InnerLayer/Inside"]
+position = Vector2(195, 84)
+scale = Vector2(3, 3)
+texture = ExtResource("3_fwmru")
+region_enabled = true
+region_rect = Rect2(221, 193, 84, 63)
+
+[node name="InteriorAssets2" type="Sprite2D" parent="InnerLayer/Inside"]
+position = Vector2(93, 465)
+scale = Vector2(3, 3)
+texture = ExtResource("3_fwmru")
+region_enabled = true
+region_rect = Rect2(309, 224, 112, 32)
+
+[node name="InteriorAssets3" type="Sprite2D" parent="InnerLayer/Inside"]
+position = Vector2(105, 300)
+scale = Vector2(3, 3)
+texture = ExtResource("3_fwmru")
+region_enabled = true
+region_rect = Rect2(431, 176, 80, 80)
+
+[node name="OuterLayer" type="Node2D" parent="." node_paths=PackedStringArray("targets", "mask_sprite")]
+script = ExtResource("1_hq0ew")
+targets = [NodePath("Outside")]
+inverse_mask_state = true
+mask_sprite = NodePath("Outside")
+
+[node name="Outside" type="Sprite2D" parent="OuterLayer"]
+texture = ExtResource("4_n8itw")
+
+[node name="Post" type="Sprite2D" parent="OuterLayer/Outside"]
+z_index = 20
+position = Vector2(-125, 320)
+texture = ExtResource("5_jg77v")
+
+[node name="Post2" type="Sprite2D" parent="OuterLayer/Outside"]
+z_index = 20
+position = Vector2(64, 320)
+texture = ExtResource("5_jg77v")
+
+[node name="Post3" type="Sprite2D" parent="OuterLayer/Outside"]
+z_index = 20
+position = Vector2(259, 320)
+texture = ExtResource("5_jg77v")
+
+[node name="Character" parent="." instance=ExtResource("5_d835l")]
+position = Vector2(542, 109)
+speed = 600.0
+
+[node name="Post" type="Sprite2D" parent="."]
+z_index = 20
+position = Vector2(-1691, 331)
+texture = ExtResource("5_jg77v")
+
+[node name="Post2" type="Sprite2D" parent="."]
+z_index = 20
+position = Vector2(-1502, 331)
+texture = ExtResource("5_jg77v")
+
+[node name="Post3" type="Sprite2D" parent="."]
+z_index = 20
+position = Vector2(-1307, 331)
+texture = ExtResource("5_jg77v")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, 527)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_ylp7s")
+
+[node name="RevealTransition" type="Area2D" parent="." node_paths=PackedStringArray("conceal")]
+position = Vector2(-749, 325)
+script = ExtResource("7_f3mo1")
+conceal = [NodePath("../OuterLayer")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevealTransition"]
+shape = SubResource("RectangleShape2D_mjh6h")
+
+[node name="Label" type="Label" parent="RevealTransition"]
+visible = false
+z_index = 100
+offset_left = -151.0
+offset_top = -308.0
+offset_right = -89.0
+offset_bottom = -285.0
+scale = Vector2(5, 5)
+text = "Enter (f)"

@@ -1,0 +1,163 @@
+[gd_scene load_steps=18 format=3 uid="uid://cmpophwv3oqc8"]
+
+[ext_resource type="Texture2D" uid="uid://muumhlh87rk2" path="res://examples/assets/visibility_layers/Ground.png" id="1_ec8yq"]
+[ext_resource type="Texture2D" uid="uid://d0pwhiyb4vby1" path="res://examples/assets/visibility_layers/Layout.png" id="2_mslpb"]
+[ext_resource type="Script" path="res://addons/revealer/scripts/revealable_group.gd" id="3_gyakw"]
+[ext_resource type="Texture2D" uid="uid://c7ascs0jd80v2" path="res://examples/assets/visibility_layers/BackHallway.png" id="4_brk6f"]
+[ext_resource type="Texture2D" uid="uid://b16k6c5etqffs" path="res://examples/assets/visibility_layers/FrontLeft.png" id="5_sy62h"]
+[ext_resource type="Texture2D" uid="uid://dogyrv31pli10" path="res://examples/assets/visibility_layers/Back.png" id="6_dqgd0"]
+[ext_resource type="Texture2D" uid="uid://bdjnqqur6qqia" path="res://examples/assets/visibility_layers/FrontHallway.png" id="7_yu1ue"]
+[ext_resource type="Texture2D" uid="uid://d18jd32dywgd3" path="res://examples/assets/visibility_layers/DoorInner.png" id="8_vhe6u"]
+[ext_resource type="Texture2D" uid="uid://cqveii7ud31s1" path="res://examples/assets/visibility_layers/FrontRight.png" id="9_sqoe1"]
+[ext_resource type="Texture2D" uid="uid://bnfkbch3pio4i" path="res://examples/assets/visibility_layers/DoorOuter.png" id="10_5njfb"]
+[ext_resource type="PackedScene" uid="uid://yn54lyl44ldw" path="res://examples/actors/door.tscn" id="11_aksyo"]
+[ext_resource type="Texture2D" uid="uid://cqcgaq2s81fsx" path="res://examples/assets/visibility_layers/Hall.png" id="12_raoue"]
+[ext_resource type="Material" uid="uid://c2lgyq8d5mpjn" path="res://addons/revealer/materials/revealable.tres" id="13_fu0xj"]
+[ext_resource type="Texture2D" uid="uid://c2k807c86es1x" path="res://examples/assets/visibility_layers/InsideMain.png" id="14_nxs5j"]
+[ext_resource type="Texture2D" uid="uid://draqj4d2wa4xw" path="res://examples/assets/visibility_layers/Main.png" id="15_uog03"]
+[ext_resource type="PackedScene" uid="uid://ca126qkj8yrw7" path="res://examples/actors/character.tscn" id="16_ypy47"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sk7ic"]
+size = Vector2(128, 2)
+
+[node name="House" type="Node2D"]
+texture_filter = 1
+
+[node name="Ground" type="Sprite2D" parent="."]
+position = Vector2(0, 15)
+texture = ExtResource("1_ec8yq")
+
+[node name="GroundCollider" type="StaticBody2D" parent="Ground"]
+position = Vector2(0, 0.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground/GroundCollider"]
+shape = SubResource("RectangleShape2D_sk7ic")
+
+[node name="Layout" type="Sprite2D" parent="."]
+position = Vector2(-2, -19)
+texture = ExtResource("2_mslpb")
+
+[node name="BackHallwayGroup" type="Node2D" parent="." node_paths=PackedStringArray("revealable_mask")]
+process_mode = 4
+visible = false
+script = ExtResource("3_gyakw")
+revealable_mask = NodePath("BackHallway")
+reveal_group_depth = 3
+
+[node name="BackHallway" type="Sprite2D" parent="BackHallwayGroup"]
+texture_filter = 1
+position = Vector2(-12, 6)
+texture = ExtResource("4_brk6f")
+
+[node name="LeftRoomGroup" type="Node2D" parent="." node_paths=PackedStringArray("revealable_mask")]
+process_mode = 4
+visible = false
+script = ExtResource("3_gyakw")
+revealable_mask = NodePath("FrontLeft")
+reveal_group_depth = 3
+
+[node name="FrontLeft" type="Sprite2D" parent="LeftRoomGroup"]
+texture_filter = 1
+position = Vector2(-32, 6)
+texture = ExtResource("5_sy62h")
+
+[node name="Back" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, 6)
+texture = ExtResource("6_dqgd0")
+
+[node name="FrontHallwayGroup" type="Node2D" parent="." node_paths=PackedStringArray("targets", "reveal_targets", "revealable_mask")]
+script = ExtResource("3_gyakw")
+targets = [NodePath("../HallExterior"), NodePath("../EntranceRoomGroup/InsideMain"), NodePath("../EntranceRoomGroup/Main -> Hallway"), NodePath("../RightRoomGroup/Right -> Hallway")]
+reveal_targets = [NodePath("../Main"), NodePath("../Main/Outside -> Main")]
+revealable_mask = NodePath("FrontHallway")
+reveal_group_depth = 1
+
+[node name="FrontHallway" type="Sprite2D" parent="FrontHallwayGroup"]
+modulate = Color(1, 1, 0.054902, 1)
+texture_filter = 1
+position = Vector2(16, 9)
+texture = ExtResource("7_yu1ue")
+
+[node name="Hallway -> Main" type="Sprite2D" parent="FrontHallwayGroup"]
+position = Vector2(-1, 12)
+texture = ExtResource("8_vhe6u")
+
+[node name="Hallway -> Right" type="Sprite2D" parent="FrontHallwayGroup"]
+position = Vector2(25, 12)
+texture = ExtResource("8_vhe6u")
+
+[node name="RightRoomGroup" type="Node2D" parent="." node_paths=PackedStringArray("targets", "conceal_targets", "revealable_mask")]
+script = ExtResource("3_gyakw")
+targets = [NodePath("FrontRight")]
+conceal_targets = [NodePath("../Main")]
+revealable_mask = NodePath("../HallExterior")
+reveal_group_depth = 2
+reveal_amount = 1.0
+
+[node name="FrontRight" type="Sprite2D" parent="RightRoomGroup"]
+modulate = Color(0.925022, 0.454282, 0.540041, 1)
+texture_filter = 1
+position = Vector2(23.5, 9)
+texture = ExtResource("9_sqoe1")
+
+[node name="Right -> Hallway" type="Sprite2D" parent="RightRoomGroup"]
+position = Vector2(25, 12)
+texture = ExtResource("10_5njfb")
+
+[node name="RightRoomDoor" parent="RightRoomGroup" node_paths=PackedStringArray("group_in_front", "group_behind") instance=ExtResource("11_aksyo")]
+position = Vector2(25, 12)
+group_in_front = NodePath("..")
+group_behind = NodePath("../../FrontHallwayGroup")
+behind = true
+invert = true
+b_to_f_skip_reveal = true
+f_to_b_skip_conceal = true
+
+[node name="HallExterior" type="Sprite2D" parent="."]
+modulate = Color(0.0823529, 1, 1, 1)
+position = Vector2(0, 6)
+texture = ExtResource("12_raoue")
+
+[node name="EntranceRoomGroup" type="Node2D" parent="." node_paths=PackedStringArray("targets", "revealable_mask")]
+script = ExtResource("3_gyakw")
+targets = [NodePath("../Main"), NodePath("../Main/Outside -> Main")]
+revealable_mask = NodePath("../Main")
+
+[node name="InsideMain" type="Sprite2D" parent="EntranceRoomGroup"]
+texture_filter = 1
+material = ExtResource("13_fu0xj")
+position = Vector2(-8.5, 8)
+texture = ExtResource("14_nxs5j")
+
+[node name="HallwayDoor" parent="EntranceRoomGroup" node_paths=PackedStringArray("group_in_front", "group_behind") instance=ExtResource("11_aksyo")]
+position = Vector2(-1, 12)
+group_in_front = NodePath("..")
+group_behind = NodePath("../../FrontHallwayGroup")
+f_to_b_skip_conceal = true
+
+[node name="Main -> Outside" type="Sprite2D" parent="EntranceRoomGroup"]
+position = Vector2(-14, 12)
+texture = ExtResource("8_vhe6u")
+
+[node name="Main -> Hallway" type="Sprite2D" parent="EntranceRoomGroup"]
+position = Vector2(-1, 12)
+texture = ExtResource("10_5njfb")
+
+[node name="Main" type="Sprite2D" parent="."]
+self_modulate = Color(0, 0.7184, 0.665796, 1)
+position = Vector2(0, 6)
+texture = ExtResource("15_uog03")
+
+[node name="MainEntrance" parent="Main" node_paths=PackedStringArray("group_behind") instance=ExtResource("11_aksyo")]
+position = Vector2(-14, 6)
+group_behind = NodePath("../../EntranceRoomGroup")
+
+[node name="Outside -> Main" type="Sprite2D" parent="Main"]
+position = Vector2(-14, 6)
+texture = ExtResource("10_5njfb")
+
+[node name="Character" parent="." instance=ExtResource("16_ypy47")]
+position = Vector2(-54, 10)
+
+[connection signal="linked_f2b" from="RightRoomGroup/RightRoomDoor" to="FrontHallwayGroup" method="begin_reveal" binds= [Vector2(0, 0)]]

@@ -1,8 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://yn54lyl44ldw"]
+[gd_scene load_steps=3 format=3 uid="uid://yn54lyl44ldw"]
 
 [ext_resource type="Script" path="res://examples/scripts/reveal_area.gd" id="1_etbnc"]
-[ext_resource type="Texture2D" uid="uid://bnfkbch3pio4i" path="res://examples/assets/house/DoorOuter.png" id="2_fud30"]
-[ext_resource type="Texture2D" uid="uid://d18jd32dywgd3" path="res://examples/assets/house/DoorInner.png" id="3_1vrl3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uygtd"]
 size = Vector2(4, 5)
@@ -13,14 +11,6 @@ script = ExtResource("1_etbnc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_uygtd")
-
-[node name="Outer" type="Sprite2D" parent="."]
-texture = ExtResource("2_fud30")
-
-[node name="Inner" type="Sprite2D" parent="."]
-visible = false
-z_index = 10
-texture = ExtResource("3_1vrl3")
 
 [node name="Label" type="Label" parent="."]
 visible = false
