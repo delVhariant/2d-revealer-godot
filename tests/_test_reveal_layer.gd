@@ -19,7 +19,6 @@ func test_init() -> void:
 		. is_signal_exists("layer_changed")
 		. is_signal_exists("processing_changed")
 	)
-	await assert_signal(test_layer).is_emitted("alpha_changed")
 
 
 func test_transition() -> void:

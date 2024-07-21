@@ -45,6 +45,7 @@ const __source = '${source_resource_path}'
 
 func _mock() -> ${source_class}:
 	return mock(${source_class}"
+settings/test/test_lookup_folder="tests"
 
 [input]
 

@@ -20,14 +20,12 @@ enum LayerStates { REVEALING, CONCEALING, WAITING }
 var reveal_objects: Array[RevealObject] = []
 
 
-
 func _ready() -> void:
 	for o in targets:
 		RevealObject.new(o, self)
 	alpha_changed.emit(alpha)
 	layer_changed.emit(reveal_states.default)
 	processing_changed.emit(processing)
-
 
 
 func _process(delta: float) -> void:

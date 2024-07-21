@@ -8,9 +8,9 @@ enum LayerIndexes { CONCEALED = 0, REVEALED = 10, PLAYER = 15, GUI = 100 }
 
 
 func _init(
-    default: LayerIndexes = LayerIndexes.CONCEALED,
+	default: LayerIndexes = LayerIndexes.CONCEALED,
 	concealed: LayerIndexes = LayerIndexes.CONCEALED,
-    revealed: LayerIndexes = LayerIndexes.REVEALED
+	revealed: LayerIndexes = LayerIndexes.REVEALED
 ) -> void:
 	self.default = default
 	self.concealed = concealed

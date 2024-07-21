@@ -19,7 +19,7 @@ tools/
 
 # editors
 *.code-workspace
-.zed/
 
+# Exclude addons used in development
 addons/gdUnit4
 addons/godot-git-plugin
