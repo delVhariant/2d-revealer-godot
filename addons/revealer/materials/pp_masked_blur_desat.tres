@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://d0obvwmfu8o36"]
+
+[ext_resource type="Shader" path="res://addons/revealer/shaders/reveal_blur.gdshader" id="1_1tybs"]
+
+[resource]
+shader = ExtResource("1_1tybs")
+shader_parameter/lod = 1.3
+shader_parameter/saturation = 0.65
+shader_parameter/masks = PackedFloat32Array()
+shader_parameter/amounts = null
+shader_parameter/samplers = null
