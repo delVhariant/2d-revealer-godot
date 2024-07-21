@@ -13,7 +13,12 @@ enum LayerStates { REVEALING, CONCEALING, WAITING }
 @export var state: LayerStates = LayerStates.WAITING
 @export var reveal_states: RevealResource = RevealResource.new()
 
+@export var inverse_mask_state: bool = false
+@export var mask_level: int = 0
+@export var mask_sprite: Sprite2D
+
 var reveal_objects: Array[RevealObject] = []
+
 
 
 func _ready() -> void:
@@ -52,3 +57,21 @@ func start_transition(reveal: bool):
 	else:
 		self.state = LayerStates.CONCEALING
 		processing_changed.emit(false)
+
+	_register_postprocess(reveal)
+
+
+func _register_postprocess(reveal: bool):
+	if not mask_sprite:
+		return
+
+	if reveal:
+		if not inverse_mask_state:
+			PostProcessLayer.get_node("BlurPostProcess").set_mask(mask_level, mask_sprite)
+		else:
+			PostProcessLayer.get_node("BlurPostProcess").set_mask(mask_level, null)
+	else:
+		if not inverse_mask_state:
+			PostProcessLayer.get_node("BlurPostProcess").set_mask(mask_level, null)
+		else:
+			PostProcessLayer.get_node("BlurPostProcess").set_mask(mask_level, mask_sprite)

@@ -2,6 +2,7 @@ class_name RevealObject extends Object
 
 var canvas_item: CanvasItem
 var default_mode: Node.ProcessMode
+var default_layer: int
 
 
 func _init(canvas_item: CanvasItem, layer: RevealLayer):
@@ -9,9 +10,9 @@ func _init(canvas_item: CanvasItem, layer: RevealLayer):
 	self.default_mode = canvas_item.process_mode
 	layer.alpha_changed.connect(self.set_alpha)
 	layer.layer_changed.connect(self.set_layer)
+	self.default_layer = self.canvas_item.z_index
 	layer.processing_changed.connect(self.set_processing)
 	self.canvas_item.show()
-
 
 
 func set_alpha(value: float):

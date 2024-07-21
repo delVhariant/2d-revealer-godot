@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="RevealResource" load_steps=2 format=3 uid="uid://26iicut3x787"]
+
+[ext_resource type="Script" path="res://addons/revealer/scripts/reveal_resource.gd" id="1_gjk3r"]
+
+[resource]
+script = ExtResource("1_gjk3r")
+concealed = 0
+revealed = 10

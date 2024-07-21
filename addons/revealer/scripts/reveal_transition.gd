@@ -68,7 +68,6 @@ func _on_body_exited(body: Node2D):
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if active and event.is_action_pressed("interact"):
-		print("inputs")
 		do_transition()
 		get_viewport().set_input_as_handled()
 

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1va3onrunvmn"]
+
+[ext_resource type="Material" uid="uid://d0obvwmfu8o36" path="res://addons/revealer/materials/pp_masked_blur_desat.tres" id="1_oh6wa"]
+[ext_resource type="Script" path="res://addons/revealer/scripts/reveal_postprocess.gd" id="2_ureyw"]
+
+[node name="PostProcessLayer" type="CanvasLayer"]
+
+[node name="BlurPostProcess" type="ColorRect" parent="."]
+material = ExtResource("1_oh6wa")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("2_ureyw")
