@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqjlyr1x6wd4k"
-path="res://.godot/imported/Outside.png-2ba853b64c97e2a07933d892689537ea.ctex"
+uid="uid://d18jd32dywgd3"
+path="res://.godot/imported/DoorInner.png-e83425826d9e0a9bb34ffd33e0266f8d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://examples/assets/Outside.png"
-dest_files=["res://.godot/imported/Outside.png-2ba853b64c97e2a07933d892689537ea.ctex"]
+source_file="res://examples/assets/visibility_layers/DoorInner.png"
+dest_files=["res://.godot/imported/DoorInner.png-e83425826d9e0a9bb34ffd33e0266f8d.ctex"]
 
 [params]
 
@@ -25,7 +25,7 @@ mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
-process/fix_alpha_border=true
+process/fix_alpha_border=false
 process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false

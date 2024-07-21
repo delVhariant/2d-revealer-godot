@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d33rbekla7wb2"
-path="res://.godot/imported/Garden.png-839e052a9cc345983601597bf9649f3b.ctex"
+uid="uid://dogyrv31pli10"
+path="res://.godot/imported/Back.png-3ca74bad38c4adcee5e6c858ae64daf4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://examples/assets/depth/Garden.png"
-dest_files=["res://.godot/imported/Garden.png-839e052a9cc345983601597bf9649f3b.ctex"]
+source_file="res://examples/assets/visibility_layers/Back.png"
+dest_files=["res://.godot/imported/Back.png-3ca74bad38c4adcee5e6c858ae64daf4.ctex"]
 
 [params]
 

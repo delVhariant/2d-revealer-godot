@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0pwhiyb4vby1"
-path="res://.godot/imported/Layout.png-9ca5e7d7d99148181f471be09ed1d53e.ctex"
+uid="uid://bdjnqqur6qqia"
+path="res://.godot/imported/FrontHallway.png-283b3746d8338007142a7acf2cc7fa1c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://examples/assets/house/Layout.png"
-dest_files=["res://.godot/imported/Layout.png-9ca5e7d7d99148181f471be09ed1d53e.ctex"]
+source_file="res://examples/assets/visibility_layers/FrontHallway.png"
+dest_files=["res://.godot/imported/FrontHallway.png-283b3746d8338007142a7acf2cc7fa1c.ctex"]
 
 [params]
 

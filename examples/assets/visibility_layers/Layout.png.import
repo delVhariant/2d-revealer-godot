@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://draqj4d2wa4xw"
-path="res://.godot/imported/Main.png-8be5c9337e22e199c7a87dc8cddd815f.ctex"
+uid="uid://d0pwhiyb4vby1"
+path="res://.godot/imported/Layout.png-a7635915e278d99aac6f913a6747bb9e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://examples/assets/house/Main.png"
-dest_files=["res://.godot/imported/Main.png-8be5c9337e22e199c7a87dc8cddd815f.ctex"]
+source_file="res://examples/assets/visibility_layers/Layout.png"
+dest_files=["res://.godot/imported/Layout.png-a7635915e278d99aac6f913a6747bb9e.ctex"]
 
 [params]
 
@@ -25,7 +25,7 @@ mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
-process/fix_alpha_border=true
+process/fix_alpha_border=false
 process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false

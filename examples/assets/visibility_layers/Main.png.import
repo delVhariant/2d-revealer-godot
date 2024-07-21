@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bdjnqqur6qqia"
-path="res://.godot/imported/FrontHallway.png-78fe238dda9879f79131f4c6d4bcb7d3.ctex"
+uid="uid://draqj4d2wa4xw"
+path="res://.godot/imported/Main.png-915859a70444b87c2d8dd0b664873ae1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://examples/assets/house/FrontHallway.png"
-dest_files=["res://.godot/imported/FrontHallway.png-78fe238dda9879f79131f4c6d4bcb7d3.ctex"]
+source_file="res://examples/assets/visibility_layers/Main.png"
+dest_files=["res://.godot/imported/Main.png-915859a70444b87c2d8dd0b664873ae1.ctex"]
 
 [params]
 
@@ -25,7 +25,7 @@ mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
-process/fix_alpha_border=false
+process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false

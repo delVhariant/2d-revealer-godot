@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0q68ardxfsx6"
-path="res://.godot/imported/Hut_cropped.png-62d91bfb4d2848eb3d968c0e5ed68488.ctex"
+uid="uid://bvvd0wwomwgfx"
+path="res://.godot/imported/post.png-af96c6dfb1b372a598c20fe5b2a45e96.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://examples/assets/depth/Hut_cropped.png"
-dest_files=["res://.godot/imported/Hut_cropped.png-62d91bfb4d2848eb3d968c0e5ed68488.ctex"]
+source_file="res://examples/assets/visibility_transparency/post.png"
+dest_files=["res://.godot/imported/post.png-af96c6dfb1b372a598c20fe5b2a45e96.ctex"]
 
 [params]
 

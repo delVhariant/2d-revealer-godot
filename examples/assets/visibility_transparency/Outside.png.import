@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://muumhlh87rk2"
-path="res://.godot/imported/Ground.png-cfd14f8d9d8090a61d4ee2b6b10dbd3d.ctex"
+uid="uid://cqjlyr1x6wd4k"
+path="res://.godot/imported/Outside.png-1e719aefabad500e3e651fcd202f20d7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://examples/assets/house/Ground.png"
-dest_files=["res://.godot/imported/Ground.png-cfd14f8d9d8090a61d4ee2b6b10dbd3d.ctex"]
+source_file="res://examples/assets/visibility_transparency/Outside.png"
+dest_files=["res://.godot/imported/Outside.png-1e719aefabad500e3e651fcd202f20d7.ctex"]
 
 [params]
 
@@ -25,7 +25,7 @@ mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
-process/fix_alpha_border=false
+process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false

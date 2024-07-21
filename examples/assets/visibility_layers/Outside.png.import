@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bnfkbch3pio4i"
-path="res://.godot/imported/DoorOuter.png-a80cd24e2af9574e796c08f810c7a566.ctex"
+uid="uid://dq3bu4u0f6vk6"
+path="res://.godot/imported/Outside.png-063f4d94271e787b55898855e4bfeda4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://examples/assets/house/DoorOuter.png"
-dest_files=["res://.godot/imported/DoorOuter.png-a80cd24e2af9574e796c08f810c7a566.ctex"]
+source_file="res://examples/assets/visibility_layers/Outside.png"
+dest_files=["res://.godot/imported/Outside.png-063f4d94271e787b55898855e4bfeda4.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ci5pmuk4impnf"
-path="res://.godot/imported/Hut.png-933d4695de895fcd5a6b7dad313f439d.ctex"
+uid="uid://bnfkbch3pio4i"
+path="res://.godot/imported/DoorOuter.png-dea471486d66f0185bb34e589e82b668.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://examples/assets/depth/Hut.png"
-dest_files=["res://.godot/imported/Hut.png-933d4695de895fcd5a6b7dad313f439d.ctex"]
+source_file="res://examples/assets/visibility_layers/DoorOuter.png"
+dest_files=["res://.godot/imported/DoorOuter.png-dea471486d66f0185bb34e589e82b668.ctex"]
 
 [params]
 
@@ -25,7 +25,7 @@ mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
-process/fix_alpha_border=true
+process/fix_alpha_border=false
 process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false

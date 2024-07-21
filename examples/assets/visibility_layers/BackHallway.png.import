@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c7ascs0jd80v2"
-path="res://.godot/imported/BackHallway.png-ed50eaf681a9075c034555b1e04e961b.ctex"
+path="res://.godot/imported/BackHallway.png-c69c7b326fcf41da67e4dc89b0f076df.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://examples/assets/house/BackHallway.png"
-dest_files=["res://.godot/imported/BackHallway.png-ed50eaf681a9075c034555b1e04e961b.ctex"]
+source_file="res://examples/assets/visibility_layers/BackHallway.png"
+dest_files=["res://.godot/imported/BackHallway.png-c69c7b326fcf41da67e4dc89b0f076df.ctex"]
 
 [params]
 
