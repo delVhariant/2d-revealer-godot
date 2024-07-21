@@ -1,12 +1,16 @@
 @tool
 extends EditorPlugin
 
-
-func _enter_tree() -> void:
-	# Initialization of the plugin goes here.
-	pass
+# Autload the PostProcessLayer
+const PP_AUTOLOAD = "PostProcessLayer"
 
 
-func _exit_tree() -> void:
-	# Clean-up of the plugin goes here.
-	pass
+func _enter_tree():
+	# The autoload can be a scene or script file.
+	add_autoload_singleton(
+		PP_AUTOLOAD, "res://addons/revealer/scenes/post_process_layer.tscn"
+	)
+
+
+func _exit_tree():
+	remove_autoload_singleton(PP_AUTOLOAD)

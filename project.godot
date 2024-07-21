@@ -11,9 +11,12 @@ config_version=5
 [application]
 
 config/name="Revealer"
-run/main_scene="res://examples/scenes/revealable.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+PostProcessLayer="*res://addons/revealer/scenes/post_process_layer.tscn"
 
 [editor]
 
@@ -31,6 +34,17 @@ import/blender/enabled=false
 [gdunit4]
 
 settings/test/test_discovery=true
+templates/testsuite/GDScript="# GdUnit generated TestSuite
+class_name ${suite_class_name}
+extends GdUnitTestSuite
+@warning_ignore('unused_parameter')
+@warning_ignore('return_value_discarded')
+
+# TestSuite generated from
+const __source = '${source_resource_path}'
+
+func _mock() -> ${source_class}:
+	return mock(${source_class}"
 
 [input]
 
@@ -57,12 +71,4 @@ interact={
 mask_bounds={
 "type": "mat4",
 "value": Projection(0, 0, 500, 500, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-}
-primary_mask_bounds={
-"type": "vec4",
-"value": Vector4(0, 0, 0, 0)
-}
-mask_samplers={
-"type": "sampler2DArray",
-"value": ""
 }
