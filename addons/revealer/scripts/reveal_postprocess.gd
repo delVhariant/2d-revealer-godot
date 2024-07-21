@@ -2,7 +2,6 @@ class_name RevealPostProcess extends ColorRect
 
 @export var masks: Array[Vector4] = [Vector4.ZERO, Vector4.ZERO, Vector4.ZERO]
 @export var samplers: Array[Sprite2D] = [null, null, null]
-@export var levels: Array[float] = [0.0, 0.0, 0.0]
 
 
 func _process(_delta: float) -> void:
@@ -13,11 +12,6 @@ func _process(_delta: float) -> void:
 func set_mask(index: int, sprite: Sprite2D):
 	samplers[index] = sprite
 	material.set_shader_parameter("samplers", samplers)
-
-
-func set_level(index: int, level: float):
-	levels[index] = level
-	material.set_shader_parameter("masks", masks)
 
 
 func setup_masks() -> void:
