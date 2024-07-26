@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bdjnqqur6qqia" path="res://examples/assets/visibility_layers/FrontHallway.png" id="10_g6g0t"]
 [ext_resource type="Texture2D" uid="uid://c7ascs0jd80v2" path="res://examples/assets/visibility_layers/BackHallway.png" id="11_4ymil"]
 [ext_resource type="Texture2D" uid="uid://dq3bu4u0f6vk6" path="res://examples/assets/visibility_layers/Outside.png" id="12_43ic4"]
-[ext_resource type="PackedScene" uid="uid://ca126qkj8yrw7" path="res://examples/actors/character.tscn" id="13_2scjh"]
+[ext_resource type="PackedScene" uid="uid://ca126qkj8yrw7" path="res://examples/scenes/actors/character.tscn" id="13_2scjh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fp6o1"]
 size = Vector2(128, 2)
