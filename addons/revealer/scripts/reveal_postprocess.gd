@@ -5,6 +5,7 @@ class_name RevealPostProcess extends ColorRect
 var layers: Array[RevealLayer] = []
 var blurred: bool = false
 
+
 func _ready() -> void:
 	update_states()
 	self.add_to_group("blur")
@@ -14,6 +15,7 @@ func update_states():
 	self.z_as_relative = false
 	self.z_index = reveal_states.concealed
 
+
 func enter_layer(layer: RevealLayer):
 	if layer not in self.layers:
 		self.layers.append(layer)
@@ -22,7 +24,8 @@ func enter_layer(layer: RevealLayer):
 		self.blurred = true
 		material.set_shader_parameter("blurred", true)
 
-func leave_layer(layer:RevealLayer):
+
+func leave_layer(layer: RevealLayer):
 	var idx = self.layers.find(layer)
 	if idx != -1:
 		self.layers.remove_at(idx)
