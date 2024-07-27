@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://d0f1bcevalf33"]
+[gd_scene load_steps=16 format=3 uid="uid://d0f1bcevalf33"]
 
 [ext_resource type="Texture2D" uid="uid://d0pwhiyb4vby1" path="res://examples/assets/visibility_layers/Layout.png" id="1_cqksx"]
 [ext_resource type="Texture2D" uid="uid://muumhlh87rk2" path="res://examples/assets/visibility_layers/Ground.png" id="2_7rcj6"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://c7ascs0jd80v2" path="res://examples/assets/visibility_layers/BackHallway.png" id="11_4ymil"]
 [ext_resource type="Texture2D" uid="uid://dq3bu4u0f6vk6" path="res://examples/assets/visibility_layers/Outside.png" id="12_43ic4"]
 [ext_resource type="PackedScene" uid="uid://ca126qkj8yrw7" path="res://examples/scenes/actors/character.tscn" id="13_2scjh"]
+[ext_resource type="PackedScene" uid="uid://c1va3onrunvmn" path="res://addons/revealer/scenes/post_process_layer.tscn" id="13_rwdtl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fp6o1"]
 size = Vector2(128, 2)
@@ -20,11 +21,10 @@ size = Vector2(128, 2)
 [node name="VisibilityLayers" type="Node2D"]
 texture_filter = 1
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 2
-follow_viewport_enabled = true
+[node name="PostProcessLayer" parent="." instance=ExtResource("13_rwdtl")]
 
-[node name="Layout" type="Sprite2D" parent="CanvasLayer"]
+[node name="Layout" type="Sprite2D" parent="."]
+z_index = 20
 texture_filter = 1
 position = Vector2(63.5, -5)
 texture = ExtResource("1_cqksx")
@@ -40,11 +40,13 @@ position = Vector2(0, 0.5)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground/GroundCollider"]
 shape = SubResource("RectangleShape2D_fp6o1")
 
-[node name="EntranceInteriorLayer" type="Node2D" parent="." node_paths=PackedStringArray("targets", "mask_sprite")]
+[node name="EntranceInteriorLayer" type="Node2D" parent="." node_paths=PackedStringArray("targets")]
 script = ExtResource("3_6b0ew")
 targets = [NodePath("InsideMain")]
+start_processing = null
 alpha = 0.0
-mask_sprite = NodePath("InsideMain")
+transition_time = null
+inverse_blur_state = null
 
 [node name="InsideMain" type="Sprite2D" parent="EntranceInteriorLayer"]
 self_modulate = Color(0, 1, 1, 1)
@@ -75,16 +77,24 @@ polygon = PackedVector2Array(-8, 2, -8, 2, -8, -11, 22, -11, 22, 2, 23, 2, 23, -
 [node name="LeftRoomLayer" type="Node2D" parent="." node_paths=PackedStringArray("targets")]
 script = ExtResource("3_6b0ew")
 targets = [NodePath("FrontLeft")]
+start_processing = null
+alpha = null
+transition_time = null
+no_blur = null
+inverse_blur_state = null
 
 [node name="FrontLeft" type="Sprite2D" parent="LeftRoomLayer"]
 position = Vector2(31.5, 20.5)
 texture = ExtResource("8_myh1n")
 
-[node name="RightRoomLayer" type="Node2D" parent="." node_paths=PackedStringArray("targets", "mask_sprite")]
+[node name="RightRoomLayer" type="Node2D" parent="." node_paths=PackedStringArray("targets")]
 script = ExtResource("3_6b0ew")
 targets = [NodePath("FrontRight")]
+start_processing = null
 alpha = 0.0
-mask_sprite = NodePath("FrontRight")
+transition_time = null
+no_blur = null
+inverse_blur_state = null
 
 [node name="FrontRight" type="Sprite2D" parent="RightRoomLayer"]
 modulate = Color(1, 1, 0, 1)
@@ -108,12 +118,14 @@ position = Vector2(-32, -1)
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RightRoomLayer/FrontRight/StaticBody2D2"]
 polygon = PackedVector2Array(16, 6.5, 16, -4.5, 48, -4.5, 48, 6.5, 49, 6.5, 49, -5.5, 15, -5.5, 15, 6.5)
 
-[node name="FrontHallwaylLayer" type="Node2D" parent="." node_paths=PackedStringArray("targets", "mask_sprite")]
+[node name="FrontHallwaylLayer" type="Node2D" parent="." node_paths=PackedStringArray("targets")]
 script = ExtResource("3_6b0ew")
 targets = [NodePath("FrontHallway")]
+start_processing = null
 alpha = 0.0
-mask_level = 1
-mask_sprite = NodePath("FrontHallway")
+transition_time = null
+no_blur = null
+inverse_blur_state = null
 
 [node name="FrontHallway" type="Sprite2D" parent="FrontHallwaylLayer"]
 self_modulate = Color(1, 0, 1, 1)
@@ -160,7 +172,11 @@ polygon = PackedVector2Array(-23.5, 5.5, -23.5, -5.5, 23.5, -5.5, 23.5, 5.5, 24.
 [node name="BackHallwayLayer" type="Node2D" parent="." node_paths=PackedStringArray("targets")]
 script = ExtResource("3_6b0ew")
 targets = [NodePath("BackHallway")]
+start_processing = null
 alpha = 0.0
+transition_time = null
+no_blur = null
+inverse_blur_state = null
 
 [node name="BackHallway" type="Sprite2D" parent="BackHallwayLayer"]
 position = Vector2(51.5, 20.5)

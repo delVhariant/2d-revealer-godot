@@ -19,6 +19,11 @@ texture_filter = 1
 
 [node name="InnerLayer" type="Node2D" parent="."]
 script = ExtResource("1_hq0ew")
+start_processing = null
+alpha = null
+transition_time = null
+no_blur = null
+inverse_blur_state = null
 
 [node name="Inside" type="Sprite2D" parent="InnerLayer"]
 texture = ExtResource("2_n1fec")
@@ -44,11 +49,14 @@ texture = ExtResource("3_fwmru")
 region_enabled = true
 region_rect = Rect2(431, 176, 80, 80)
 
-[node name="OuterLayer" type="Node2D" parent="." node_paths=PackedStringArray("targets", "mask_sprite")]
+[node name="OuterLayer" type="Node2D" parent="." node_paths=PackedStringArray("targets")]
 script = ExtResource("1_hq0ew")
 targets = [NodePath("Outside")]
-inverse_mask_state = true
-mask_sprite = NodePath("Outside")
+start_processing = null
+alpha = null
+transition_time = null
+no_blur = null
+inverse_blur_state = null
 
 [node name="Outside" type="Sprite2D" parent="OuterLayer"]
 texture = ExtResource("4_n8itw")

@@ -64,12 +64,12 @@ func _register_postprocess(reveal: bool):
 		return
 
 	if reveal:
-		if not inverse_mask_state:
-			PostProcessLayer.get_node("BlurPostProcess").set_mask(mask_level, mask_sprite)
+		if not inverse_blur_state:
+			get_tree().call_group("blur", "enter_layer", self)
 		else:
-			PostProcessLayer.get_node("BlurPostProcess").set_mask(mask_level, null)
+			get_tree().call_group("blur", "leave_layer", self)
 	else:
-		if not inverse_mask_state:
-			PostProcessLayer.get_node("BlurPostProcess").set_mask(mask_level, null)
+		if not inverse_blur_state:
+			get_tree().call_group("blur", "leave_layer", self)
 		else:
-			PostProcessLayer.get_node("BlurPostProcess").set_mask(mask_level, mask_sprite)
+			get_tree().call_group("blur", "enter_layer", self)

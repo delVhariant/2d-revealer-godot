@@ -14,10 +14,6 @@ config/name="Revealer"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
-[autoload]
-
-PostProcessLayer="*res://addons/revealer/scenes/post_process_layer.tscn"
-
 [editor]
 
 version_control/plugin_name="GitPlugin"
